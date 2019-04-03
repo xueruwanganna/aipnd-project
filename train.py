@@ -35,7 +35,7 @@ parser.add_argument('--hidden_units', action = 'store',
                     help = 'Enter number of hidden units in classifier, default is 4096.')
 
 parser.add_argument('--epochs', action = 'store',
-                    dest = 'num_epochs', type = int, default = 2,
+                    dest = 'num_epochs', type = int, default = 1,
                     help = 'number of epochs during training, default is 1.')
 
 parser.add_argument('--gpu', action = "store_true", default = False,
