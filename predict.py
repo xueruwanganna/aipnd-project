@@ -32,7 +32,7 @@ parser.add_argument('--top_k', action='store',
 
 parser.add_argument('--cat_to_name', action='store',
                     dest='cat_name_dir', default = 'cat_to_name.json',
-                    help='Enter path to image.')
+                    help='path to image.')
 
 parser.add_argument('--gpu', action="store_true", default=False,
                     help='Turn GPU mode on or off, default is off.')
