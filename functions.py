@@ -3,13 +3,13 @@ import numpy as np
 from torch import nn
 from torch import optim
 import torch.nn.functional as F
+from collections import OrderedDict
 from torchvision import datasets, transforms, models
 
 def build_classifier(model, input_units, hidden_units, dropout):
     for param in model.parameters():
         param.requires_grad = False
 
-    from collections import OrderedDict
     classifier = nn.Sequential(OrderedDict([
                               ('fc1', nn.Linear(input_units, hidden_units)),
                               ('relu', nn.ReLU()),
@@ -29,8 +29,7 @@ def validation(model, validloader, criterion, gpu_mode):
     
     if gpu_mode == True: model.to('cuda')
 
-    for images, labels in validloader:
-        
+    for images, labels in validloader:       
         if gpu_mode == True: images, labels = images.to('cuda'), labels.to('cuda')
         output = model.forward(images)
         valid_loss += criterion(output, labels).item()
@@ -102,7 +101,7 @@ def test_model(model, testloader, gpu_mode):
 
 
     
-def save_model(model, train_data, optimizer, save_dir, epochs):
+def save_model(model, train_data, optimizer, save_dir):
     checkpoint = {'state_dict': model.state_dict(),
                   'classifier': model.classifier,
                   'class_to_idx': train_data.class_to_idx,
